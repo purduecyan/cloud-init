@@ -196,7 +196,7 @@ autoinstall:
       - apt-mark hold kubelet kubeadm kubectl
       - 'cd $USER'
       - 'echo "Initialsing Kubernetes cluster..."'
-      - 'sudo kubeadm init --apiserver-advertise-address=$(hostname -I | cut -d ' ' -f 1) --pod-network-cidr=192.168.0.0/16 >> /root/kubeinit.log 2>/dev/null'
+      - 'sudo kubeadm init --apiserver-advertise-address=$(hostname -I | cut -d " " -f 1) --pod-network-cidr=192.168.0.0/16 >> /root/kubeinit.log 2>/dev/null'
       - 'sudo mkdir -p ~/.kube'
       - 'sudo cp /etc/kubernetes/admin.conf ~/.kube/config'
       - 'sudo chown -R $(id -u):$(id -g) ~/.kube/config'
@@ -219,7 +219,7 @@ autoinstall:
       - 'cd ~'
       - 'git clone https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner.git'
       - 'cd nfs-subdir-external-provisioner/deploy'
-      - 'sed -i "s/10.3.243.101/$(hostname -I | cut -d ' ' -f 1)/g" deployment.yaml'
+      - 'sed -i "s/10.3.243.101/$(hostname -I | cut -d " " -f 1)/g" deployment.yaml'
       - 'sed -i "s+/ifs/kubernetes+/srv/nfs/kube+g" deployment.yaml'
       - 'kubectl apply -f class.yaml rbac.yaml deployment.yaml'
       - 'chown -R ubuntu:ubuntu /home/ubuntu'
