@@ -23,6 +23,7 @@ packages:
   - iperf
   - python-is-python3
   - linux-headers-5.15.0-91-generic
+  - bpftrace
 
 runcmd:
   - cd /root
@@ -30,7 +31,7 @@ runcmd:
   - export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
   - git clone https://github.com/iovisor/bcc.git
   - mkdir bcc/build; cd bcc/build
-  - cmake ..
+  - cmake .. -DENABLE_LLVM_SHARED=1
   - make
   - sudo make install
   - cmake -DPYTHON_CMD=python3 ..
